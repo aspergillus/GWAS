@@ -1,0 +1,25 @@
+x=["Studies:  2 ,Associations:  8 , Variants:  8 , Traits:  1"]
+["Studies:  2 ,Associations:  8 , Variants:  8 , Traits:  1"]
+
+x[0].split(',')
+(4) ["Studies:  2 ", "Associations:  8 ", " Variants:  8 ", " Traits:  1"]
+
+spliited = x[0].split(',')
+(4) ["Studies:  2 ", "Associations:  8 ", " Variants:  8 ", " Traits:  1"]0: "Studies:  2 "1: "Associations:  8 "2: " Variants:  8 "3: " Traits:  1"length: 4__proto__: Array(0)
+
+for (let i = 0; i < spliited.length; i++)
+{
+    value = spliited[i].split(': ')
+    
+VM502:4 Uncaught SyntaxError: Unexpected end of input
+
+for (let i = 0; i < spliited.length; i++)
+{
+    value = spliited[i].split(': ')
+    console.log(value[0], value[1])
+}
+VM738:4 Studies  2 
+VM738:4 Associations  8 
+VM738:4  Variants  8 
+VM738:4  Traits  1
+undefined

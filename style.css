@@ -1,0 +1,23 @@
+.body {
+    border: 3px solid #dedede;
+    background-color: #dcdde1;
+}
+
+.head_line{
+    text-align: center;
+    font-size: -webkit-xxx-large;
+}
+
+.search_text{
+    border: 3px solid #ccc;
+    text-align: -webkit-center;
+}
+
+.form-control{
+    border-radius: 15px;
+    font-size: 20px; 
+}
+
+.form-inline{
+    text-align: center;
+}
