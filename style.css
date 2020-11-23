@@ -1,23 +1,104 @@
-.body {
-    border: 3px solid #dedede;
-    background-color: #dcdde1;
+body {
+    height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    font-family: Times New Roman;
 }
 
-.head_line{
+.jumpotron {
     text-align: center;
     font-size: -webkit-xxx-large;
 }
 
-.search_text{
-    border: 3px solid #ccc;
-    text-align: -webkit-center;
+th,
+td,
+p,
+input {
+    font: 14px Verdana;
 }
 
-.form-control{
-    border-radius: 15px;
-    font-size: 20px; 
-}
-
-.form-inline{
+table,
+th,
+td {
+    border: solid 1px #DDD;
+    border-collapse: collapse;
+    padding: 2px 3px;
     text-align: center;
+}
+
+th {
+    font-weight: bold;
+}
+
+.form {
+    width: 88%;
+    position: relative;
+    height: 50px;
+    overflow: hidden;
+    float: left;
+}
+
+.form input {
+    width: 100%;
+    height: 100%;
+    color: #595f6e;
+    padding-top: 20px;
+    border: none;
+    outline: none;
+    padding-bottom: 10px;
+}
+
+.form label {
+    position: absolute;
+    bottom: 0px;
+
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid black;
+}
+
+.form label::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -3px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #5fa8d3;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.form input:focus+.label-name .content-name,
+.form input:valid+.label-name .content-name {
+    transform: translateY(-90%);
+    font-size: 14px;
+    color: #5fa8d3;
+}
+
+.form input:focus+.label-name::after,
+.form input:valid+.label-name::after {
+    transform: translateX(0%);
+}
+
+.search-button {
+    width: 10%;
+    padding-top: 15px;
+    float: right
+}
+
+#result_box {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

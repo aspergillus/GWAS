@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const f = urlParams.get("of");
+    const q = urlParams.get("query");
+
+    let tableData = [];
+    const apiCall = async () => {
+      try {
+        const getData = await fetch(
+          `http://127.0.0.1:7262/GetData?of=${f}&query=${q}`
+        );
+        tableData = await getData.json();
+        displayHtml();
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    apiCall();
+
+    const displayHtml = () => {
+      let th = "";
+      let td = "";
+      let headerArray = [];
+
+      // function for getting table header
+      tableData.map((val, key) => {
+        for (head in val) {
+          headerArray.push(head);
+        }
+      });
+
+      // function for getting unique header
+      const uniqueHeader = headerArray.filter(
+        (value, index, self) => self.indexOf(value) === index
+      );
+
+      uniqueHeader.map((val) => {
+        let newVal = val.replace(/_/g, " ").toUpperCase();
+        th += `<th>${newVal}</th>`;
+      });
+
+      let uniArray = [...uniqueHeader];
+
+      let getHelAr = "";
+      tableData.map((val, key) => {
+        td += "<tr>";
+        for (let i = 0; i < uniArray.length; i++) {
+          getHelAr = uniArray[i];
+          let valGet = val[getHelAr];
+          td += `<td>${valGet}</td>`;
+        }
+        td += "</tr>";
+      });
+      document.getElementById("tableHeader").innerHTML = th;
+      document.getElementById("tableBody").innerHTML = td;
+    };
+  </script>
+  <style>
+    body {
+      height: 60vh;
+      display: flex;
+      justify-content: space-around;
+      font-family: Times New Roman;
+    }
+
+    .jumpotron {
+      text-align: center;
+      font-size: -webkit-xxx-large;
+    }
+
+    th,
+    td,
+    p,
+    input {
+      font: 14px Verdana;
+    }
+
+    table,
+    th,
+    td {
+      border: solid 1px #DDD;
+      border-collapse: collapse;
+      padding: 2px 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    .Datatable{
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container-fluid body">
+
+    <!-- jumpotron of the page -->
+    <div class="jumpotron">
+      <h1 class="head_line">GWAS</h1>
+      <h4>Genome Wide Association Studies</h4>
+    </div>
+
+    <!-- Displaping the data of the query -->
+    <div id="display-data">
+      <table class="Datatable" id="dataTable">
+        <thead id="tableHeader"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
